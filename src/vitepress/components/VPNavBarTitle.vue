@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useData } from 'vitepress'
 import { Config } from '../config'
-const { title, theme } = useData<Config>()
+const { theme, site } = useData<Config>()
 </script>
 
 <template>
@@ -9,10 +9,10 @@ const { title, theme } = useData<Config>()
     <img
       v-if="theme.logo"
       :src="theme.logo"
-      :alt="`${title} Logo`"
+      :alt="`${site.title} Logo`"
       class="logo"
     />
-    <span class="text">{{ title }}</span>
+    <span class="text">{{ site.title }}</span>
   </a>
 </template>
 
