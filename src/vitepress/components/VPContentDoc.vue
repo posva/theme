@@ -9,12 +9,15 @@ import { VTLink, VTIconEdit } from '../../core'
 
 const { page, frontmatter, theme } = useData<Config>()
 
-const hashMatch = /#(\w+)$/
+const hashMatch = /#([\w\.\-\/]+)$/
 
 const repoUrl = computed(() => {
   const repo = theme.value.editLink?.repo || 'vuejs/docs'
   const branch = repo.match(hashMatch)?.[1] || 'main'
-  return `https://github.com/vuejs/docs/edit/${branch}/src/${page.value.relativePath}`
+  const folder = theme.value.editLink?.folder || 'src'
+  return `https://github.com/${repo.split('#')[0]}/edit/${branch}/${folder}/${
+    page.value.relativePath
+  }`
 })
 
 const pageClass = computed(() => {
@@ -49,7 +52,9 @@ const pageClass = computed(() => {
             v-if="theme.editLink && frontmatter.editLink !== false"
           >
             <VTIconEdit class="vt-icon" />
-            <VTLink :href="repoUrl" :no-icon="true">{{ theme.editLink.text }}</VTLink>
+            <VTLink :href="repoUrl" :no-icon="true">{{
+              theme.editLink.text
+            }}</VTLink>
           </p>
         </main>
         <slot name="content-bottom" />

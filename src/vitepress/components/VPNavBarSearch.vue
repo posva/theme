@@ -2,8 +2,9 @@
 import '@docsearch/css'
 import { useData } from 'vitepress'
 import { ref, defineAsyncComponent, onMounted, onUnmounted } from 'vue'
+import { Config } from '../config'
 
-const { theme } = useData()
+const { theme } = useData<Config>()
 const VPAlgoliaSearchBox = defineAsyncComponent(
   () => import('./VPAlgoliaSearchBox.vue')
 )
@@ -15,6 +16,7 @@ const loaded = ref(false)
 const metaKey = ref()
 
 onMounted(() => {
+  if (!theme.value.algolia) return
   // meta key detect (same logic as in @docsearch/js)
   metaKey.value.textContent = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)
     ? '⌘'

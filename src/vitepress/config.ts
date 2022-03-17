@@ -19,6 +19,11 @@ export interface Config {
   socialLinks?: SocialLink[]
 
   /**
+   * Absolute path to the logo to be displayed on the navbar.
+   */
+  logo?: string
+
+  /**
    * The nav items.
    */
   nav?: NavItem[]
@@ -40,6 +45,11 @@ export interface Config {
      */
     repo?: string
     text?: string
+
+    /**
+     * Folder where the docs are **without leading or trailing slash**. Defaults to `src`.
+     */
+    folder?: string
   }
 
   /**
